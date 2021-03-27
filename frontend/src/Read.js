@@ -59,7 +59,8 @@ export default function Read(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <Box my={8} mx={8} className={classes.content}>
+      <Box my={4} mx={8} className={classes.content}>
+        <div className={classes.toolbar} />
         <Typography variant="h2">Notes: {title}</Typography>
         <div className={classes.paragraph}>
           <Typography variant="body1">{content}</Typography>

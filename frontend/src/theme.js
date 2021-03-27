@@ -24,8 +24,8 @@ const theme = createMuiTheme({
       color: "#fffdfb",
     },
     h2: {
-      fontFamily: "Karla", // Change a specific variant
-      fontSize: 30,
+      fontFamily: "Spectral", // Change a specific variant
+      fontSize: 32,
       lineHeight: 1.5,
     },
     h6: {
