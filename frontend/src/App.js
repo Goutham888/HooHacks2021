@@ -27,7 +27,7 @@ const Main = () => {
       <Route exact path="/transcribe" component={Transcribe} />
       <Route exact path="/read" component={Read} />
       <Route exact path="/profile" component={Profile} />
-      <Route exact path="/sign-in" component={Login} />
+      <Route exact path="/log-in" component={Login} />
       <Route exact path="/sign-up" component={Signup} />
     </Switch>
   );
@@ -37,7 +37,7 @@ export default function App() {
   const classes = useStyles();
 
   return (
-    <Box className={classes.root} bgcolor="primary.main">
+    <Box className={classes.root}>
       <TopBar />
       <Main />
     </Box>
