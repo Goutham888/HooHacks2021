@@ -1,6 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
 // A custom theme for this app
+// from -- Color Hunt Palette 100864
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -17,6 +18,11 @@ const theme = createMuiTheme({
     },
   },
   typography: {
+    h1: {
+      fontFamily: "Spectral", // Change a specific variant
+      fontWeight: 800,
+      color: "#fffdfb",
+    },
     h4: {
       fontFamily: "Spectral", // Change a specific variant
     },
