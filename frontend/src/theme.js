@@ -17,7 +17,7 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    h2: {
+    h4: {
       fontFamily: "Spectral", // Change a specific variant
     },
     h6: {
@@ -31,7 +31,7 @@ const theme = createMuiTheme({
     },
     body1: {
       fontFamily: "Karla",
-      fontWeight: 400,
+      fontWeight: 500,
     },
   },
 });
