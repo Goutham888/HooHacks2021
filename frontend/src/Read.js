@@ -4,6 +4,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import Box from "@material-ui/core/Box";
+import axios from "axios";
 
 const drawerWidth = 400;
 const useStyles = makeStyles((theme) => ({
@@ -26,78 +27,42 @@ const useStyles = makeStyles((theme) => ({
   toolbar: theme.mixins.toolbar,
 }));
 
-function PageContent() {
-  const classes = useStyles();
-  return (
-    <div>
-      Gregor Samsa wakes up one morning to find himself transformed into a
-      "monstrous vermin". He initially considers the transformation to be
-      temporary and slowly ponders the consequences of this metamorphosis.
-      Unable to get up and leave the bed, Gregor reflects on his job as a
-      traveling salesman and cloth merchant, which he characterizes as being
-      full of "temporary and constantly changing human relationships, which
-      never come from the heart". He sees his employer as a despot and would
-      quickly quit his job had he not been his family's sole breadwinner and
-      working off his bankrupt father's debts. While trying to move, Gregor
-      finds that his office manager, the chief clerk, has shown up to check on
-      him, indignant about Gregor's unexcused absence. Gregor attempts to
-      communicate with both the manager and his family, but all they can hear
-      from behind the door is incomprehensible vocalizations. Gregor laboriously
-      drags himself across the floor and opens the door. The manager, upon
-      seeing the transformed Gregor, flees the apartment. Gregor's family is
-      horrified, and his father drives him back into his room under the threat
-      of violence. Gregor Samsa wakes up one morning to find himself transformed
-      into a "monstrous vermin". He initially considers the transformation to be
-      temporary and slowly ponders the consequences of this metamorphosis.
-      Unable to get up and leave the bed, Gregor reflects on his job as a
-      traveling salesman and cloth merchant, which he characterizes as being
-      full of "temporary and constantly changing human relationships, which
-      never come from the heart". He sees his employer as a despot and would
-      quickly quit his job had he not been his family's sole breadwinner and
-      working off his bankrupt father's debts. While trying to move, Gregor
-      finds that his office manager, the chief clerk, has shown up to check on
-      him, indignant about Gregor's unexcused absence. Gregor attempts to
-      communicate with both the manager and his family, but all they can hear
-      from behind the door is incomprehensible vocalizations. Gregor laboriously
-      drags himself across the floor and opens the door. The manager, upon
-      seeing the transformed Gregor, flees the apartment. Gregor's family is
-      horrified, and his father drives him back into his room under the threat
-      of violence. Gregor Samsa wakes up one morning to find himself transformed
-      into a "monstrous vermin". He initially considers the transformation to be
-      temporary and slowly ponders the consequences of this metamorphosis.
-      Unable to get up and leave the bed, Gregor reflects on his job as a
-      traveling salesman and cloth merchant, which he characterizes as being
-      full of "temporary and constantly changing human relationships, which
-      never come from the heart". He sees his employer as a despot and would
-      quickly quit his job had he not been his family's sole breadwinner and
-      working off his bankrupt father's debts. While trying to move, Gregor
-      finds that his office manager, the chief clerk, has shown up to check on
-      him, indignant about Gregor's unexcused absence. Gregor attempts to
-      communicate with both the manager and his family, but all they can hear
-      from behind the door is incomprehensible vocalizations. Gregor laboriously
-      drags himself across the floor and opens the door. The manager, upon
-      seeing the transformed Gregor, flees the apartment. Gregor's family is
-      horrified, and his father drives him back into his room under the threat
-      of violence.
-    </div>
-  );
-}
-
 export default function Read(props) {
   const classes = useStyles();
-  const theme = useTheme();
+  const [title, setTitle] = useState("TITLE HERE");
+  const [content, setContent] = useState("CONTENT HERE");
+  let paragraphs = 0;
+  let words = 0;
+  let pages = 0;
+  let readingTime = 0;
+
+  useEffect(() => {
+    // The config info for axios request
+    const config = {
+      method: "get",
+      // put the backend endpoint here
+      url: "END_POINT_HERE",
+      headers: {},
+    };
+
+    axios(config)
+      .then((response) => {
+        // get things from API
+        setTitle(response.data.title);
+        setContent(response.data.content);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  });
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <Box my={8} mx={8} className={classes.content}>
-        <Typography variant="h2">
-          Notes: MIT 6.042, Discrete Mathematics
-        </Typography>
+        <Typography variant="h2">Notes: {title}</Typography>
         <div className={classes.paragraph}>
-          <Typography variant="body1">
-            <PageContent />
-          </Typography>
+          <Typography variant="body1">{content}</Typography>
         </div>
       </Box>
       <nav className={classes.drawer}>
@@ -112,13 +77,16 @@ export default function Read(props) {
           <div className={classes.toolbar} />
           <Box mx={4} my={4}>
             {/* video title */}
-            <Typography variant="h5">MIT 6.042 Discrete Mathematics</Typography>
-
+            <Typography variant="h5">{title}</Typography>
             <hr />
             <Typography variant="h5">Notes Info</Typography>
-            <Typography variant="body1">11 paragraphs</Typography>
-            <Typography variant="body1">659 words, 2 pages</Typography>
-            <Typography variant="body1">Reading time est.: 3 min</Typography>
+            <Typography variant="body1">{paragraphs} paragraphs</Typography>
+            <Typography variant="body1">
+              {words} words, {pages} pages
+            </Typography>
+            <Typography variant="body1">
+              Reading time est.: {readingTime} min
+            </Typography>
           </Box>
         </Drawer>
       </nav>
