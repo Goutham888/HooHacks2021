@@ -14,21 +14,22 @@ from punctuator import Punctuator
 
 
 LANGUAGE = "english"
-SENTENCES_COUNT = 1
+SENTENCES_COUNT = 10
 
 
-if __name__ == "__main__":
+def get_summary(video_id: str):
     script=""
+    summary=""
     p = Punctuator('Demo-Europarl-EN.pcl')
     # retrieve the available transcripts
-    transcript_list = YouTubeTranscriptApi.list_transcripts('SBqnRja4CW4')
+    transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
 
     transcript = transcript_list.find_transcript(['en'])
 
     phrases = transcript.fetch()
     for phrase in phrases:
             script=script+phrase['text']+" "
-            
+
     words = script.split(' ')
     script=""
     for word in words:
@@ -43,5 +44,11 @@ if __name__ == "__main__":
     summarizer = Summarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
+    
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        print(sentence)
+        summary=summary+str(sentence)+" "
+
+    return summary
+
+if __name__ == "__main__":
+    print(get_summary('-krnpNGHzvA'))
