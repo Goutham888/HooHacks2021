@@ -35,44 +35,38 @@ const useStyles = makeStyles((theme) => ({
 export default function Transcribe() {
   const classes = useStyles();
   return (
-    <Box bgcolor="primary.main" className="classes.content">
-      <Box my={14} mx={2}>
-        <AppBar />
-        <Grid
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="center"
-        >
-          <Grid item>
-            <Box>
-              <Typography variant="h1">
-                Empower students
-                <br />
-                with ADHD
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item>
-            <img src={pencils} alt="logo" width={400} />
-          </Grid>
+    <Box my={12} mx={2}>
+      <AppBar />
+      <Grid
+        container
+        direction="row"
+        justify="space-between"
+        alignItems="center"
+      >
+        <Grid item>
+          <Box className="classes.content">
+            <Typography variant="h1">
+              Empower students
+              <br />
+              with ADHD
+            </Typography>
+          </Box>
         </Grid>
-        <Box mt={8} display="flex" justifyContent="center" alignItems="center">
-          <Paper component="form" className={classes.searchbar}>
-            <InputBase
-              className={classes.input}
-              placeholder="YouTube link here"
-              inputProps={{ "aria-label": "transcribe" }}
-            />
-            <Button
-              type="submit"
-              className={classes.button}
-              aria-label="search"
-            >
-              Transcribe
-            </Button>
-          </Paper>
-        </Box>
+        <Grid item>
+          <img src={pencils} alt="logo" width={400} />
+        </Grid>
+      </Grid>
+      <Box mt={8} display="flex" justifyContent="center" alignItems="center">
+        <Paper component="form" className={classes.searchbar}>
+          <InputBase
+            className={classes.input}
+            placeholder="YouTube link here"
+            inputProps={{ "aria-label": "transcribe" }}
+          />
+          <Button type="submit" className={classes.button} aria-label="search">
+            Transcribe
+          </Button>
+        </Paper>
       </Box>
     </Box>
   );
