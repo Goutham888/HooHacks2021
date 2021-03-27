@@ -86,7 +86,7 @@ export default function Read(props) {
               {words} words, {pages} pages
             </Typography>
             <Typography variant="body1">
-              Reading time est.: {readingTime} min
+              Reading time est.: {readingTime} minutes
             </Typography>
           </Box>
         </Drawer>

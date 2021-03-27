@@ -20,17 +20,24 @@ const theme = createMuiTheme({
   typography: {
     h1: {
       fontFamily: "Spectral", // Change a specific variant
-      fontWeight: 800,
       color: "#fffdfb",
+      fontStyle: "italic",
     },
     h2: {
       fontFamily: "Spectral", // Change a specific variant
       fontSize: 32,
       lineHeight: 1.5,
     },
+    h3: {
+      fontFamily: "Karla", // Change a specific variant
+      color: "#fffdfb",
+      fontSize: 28,
+      lineHeight: 1.5,
+    },
     h6: {
       fontFamily: "Karla",
       fontWeight: 600,
+      fontSize: 20,
     },
     h7: {
       fontFamily: "Karla",

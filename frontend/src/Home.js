@@ -15,6 +15,9 @@ const useStyles = makeStyles((theme) => ({
   content: {
     height: "calc(100vh - 64px)",
   },
+  item: {
+    marginY: theme.spacing(4),
+  },
   searchbar: {
     padding: "4px 4px",
     display: "flex",
@@ -26,9 +29,8 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(1),
     flex: 1,
   },
-  button: {
+  iconButton: {
     padding: 10,
-    backgroundColor: theme.palette.secondary.main,
   },
 }));
 
@@ -44,7 +46,7 @@ export default function Transcribe() {
           justify="space-between"
           alignItems="center"
         >
-          <Grid item>
+          <Grid item className={classes.item}>
             <Box>
               <Typography variant="h1">
                 Empower students
@@ -53,26 +55,52 @@ export default function Transcribe() {
               </Typography>
             </Box>
           </Grid>
-          <Grid item>
+          <Grid item className={classes.item}>
             <img src={pencils} alt="logo" width={400} />
           </Grid>
         </Grid>
-        <Box mt={8} display="flex" justifyContent="center" alignItems="center">
+        <br />
+        <Grid
+          container
+          direction="column"
+          justify="space-between"
+          alignItems="center"
+        >
+          <Typography variant="h3">Start using PencilBuds!</Typography>
           <Paper component="form" className={classes.searchbar}>
             <InputBase
               className={classes.input}
-              placeholder="YouTube link here"
+              placeholder="Enter YouTube link here"
               inputProps={{ "aria-label": "transcribe" }}
             />
-            <Button
+            <IconButton
               type="submit"
-              className={classes.button}
+              className={classes.iconButton}
               aria-label="search"
             >
-              Transcribe
-            </Button>
+              <SearchIcon />
+            </IconButton>
           </Paper>
-        </Box>
+        </Grid>
+        <br />
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="center"
+          spacing={4}
+        >
+          <Grid item className={classes.item}>
+            <Box width="50%">
+              <Typography variant="h3">
+                Since COVID, much of the learning have turned online, and
+                countless students learn by watching online video lectures.
+                Video lectures on websites, like YouTube, not only are easy to
+                access, but also provides quality education for free.
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
