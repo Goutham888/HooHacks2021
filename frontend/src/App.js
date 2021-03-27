@@ -1,5 +1,6 @@
 import TopBar from "./components/TopBar";
 import { makeStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 
 import { Route, Switch } from "react-router-dom";
 import Transcribe from "./Transcribe";
@@ -36,9 +37,9 @@ export default function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root} bgcolor="primary.main">
       <TopBar />
       <Main />
-    </div>
+    </Box>
   );
 }
