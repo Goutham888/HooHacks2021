@@ -62,58 +62,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SuggestionCard(props) {
-  const classes = useStyles();
-  const theme = useTheme();
-
-  const cardStyle = {
-    backgroundColor: theme.palette.error.main,
-    // display: 'block',
-    borderRadius: 15,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    position: "sticky",
-  };
-
-  return (
-    <Box mx={0} my={4}>
-      <Card style={cardStyle}>
-        <CardContent>
-          <Typography
-            className={classes.title}
-            color="textSecondary"
-            gutterBottom
-          >
-            Suggestion
-          </Typography>
-          <Typography variant="body1">
-            Pronounce: {props.correct}
-            <br />
-            Your answer: {props.yourAnswer}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Chip
-            size="small"
-            icon={<VolumeUpIcon />}
-            label="Play Audio"
-            clickable
-            color="primary"
-          />
-          <Chip
-            size="small"
-            icon={<StarRoundedIcon />}
-            label="Practice Later"
-            clickable
-            color="primary"
-          />
-        </CardActions>
-      </Card>
-    </Box>
-  );
-}
-
 function PageContent() {
   const classes = useStyles();
   return (
@@ -213,7 +161,7 @@ export default function Read(props) {
     <div className={classes.root}>
       <CssBaseline />
       <Box my={8} mx={8} className={classes.content}>
-        <h1>Quiz</h1>
+        <h1>Summary</h1>
         <div className={classes.paragraph}>
           <Typography variant="body1">
             <PageContent />
@@ -241,26 +189,6 @@ export default function Read(props) {
             >
               <CloseIcon />
             </IconButton>
-            <SuggestionCard
-              yourAnswer="aa vuh ka dow"
-              correct="aa vuh ka dow"
-            />
-            <SuggestionCard
-              yourAnswer="aa vuh ka dow"
-              correct="aa vuh ka dow"
-            />
-            <SuggestionCard
-              yourAnswer="aa vuh ka dow"
-              correct="aa vuh ka dow"
-            />
-            <SuggestionCard
-              yourAnswer="aa vuh ka dow"
-              correct="aa vuh ka dow"
-            />
-            <SuggestionCard
-              yourAnswer="aa vuh ka dow"
-              correct="aa vuh ka dow"
-            />
           </Drawer>
         </Hidden>
         <Hidden xsDown implementation="css">
@@ -273,28 +201,7 @@ export default function Read(props) {
             anchor="right"
           >
             <div className={classes.toolbar} />
-            <Box mx={4}>
-              <SuggestionCard
-                yourAnswer="aa vuh ka dow"
-                correct="aa vuh ka dow"
-              />
-              <SuggestionCard
-                yourAnswer="aa vuh ka dow"
-                correct="aa vuh ka dow"
-              />
-              <SuggestionCard
-                yourAnswer="aa vuh ka dow"
-                correct="aa vuh ka dow"
-              />
-              <SuggestionCard
-                yourAnswer="aa vuh ka dow"
-                correct="aa vuh ka dow"
-              />
-              <SuggestionCard
-                yourAnswer="aa vuh ka dow"
-                correct="aa vuh ka dow"
-              />
-            </Box>
+            <Box mx={4}></Box>
           </Drawer>
         </Hidden>
       </nav>
