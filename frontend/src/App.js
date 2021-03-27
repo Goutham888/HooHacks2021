@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import TopBar from "./components/TopBar";
+import { makeStyles } from "@material-ui/core/styles";
 
-function App() {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexDirection: "column",
+    minHeight: "100vh",
+    flexGrow: 1,
+  },
+}));
+
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={classes.root}>
+      <TopBar />
+      <h1>Hello world</h1>
+      {/*<Footer/>*/}
     </div>
   );
 }
-
-export default App;
