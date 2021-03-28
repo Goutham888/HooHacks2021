@@ -1,26 +1,31 @@
 import os
 
 import youtube_dl
-from pytube import YouTube
+from dotenv import load_dotenv
+from google.cloud import speech
+from google.cloud import storage
 from sumy.nlp.stemmers import Stemmer
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.summarizers.lsa import LsaSummarizer as Summarizer
 from sumy.utils import get_stop_words
-from google.cloud import speech
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 10
+bucket_name = 'hoohacks2021'
+print(bucket_name)
+gs_uri_prefix = f"gs://{bucket_name}"
+print(gs_uri_prefix)
 
 
 def download_video(video_id):
     ydl_opts = {
         'format':
             'bestaudio/best',
-        'outtmpl': "{0}.wav".format(video_id),
+        'outtmpl': "{0}.flac".format(video_id),
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'wav',
+            'preferredcodec': 'flac',
             'preferredquality': '192'
         }],
     }
@@ -29,13 +34,22 @@ def download_video(video_id):
         ydl.download(['http://www.youtube.com/watch?v={0}'.format(video_id)])
 
 
-def transcribe_file(mode, path, bucket_name, punctuation):
+def transcribe_file(input_language, mode, path, bucket_name):
     """Asynchronously transcribes the audio file specified."""
+
+    if input_language == 'fr':
+        language = 'fr-FR'
+    else:
+        language = 'en-US'
 
     client = speech.SpeechClient()
     config = speech.RecognitionConfig(
+        encoding=speech.RecognitionConfig.AudioEncoding.FLAC,
         language_code="en-US",
-        enable_automatic_punctuation=punctuation,
+        enable_word_time_offsets=True,
+        model='video',
+        audio_channel_count=2,
+        enable_automatic_punctuation=True,
     )
 
     # file on GCS
@@ -61,30 +75,45 @@ def transcribe_file(mode, path, bucket_name, punctuation):
         print("Confidence: {}".format(result.alternatives[0].confidence))
         content += result.alternatives[0].transcript
         content += "\n"
-    # content_newlines = split_newlines(content)
-    # filename = path.split('/')[-1]
-    # save_transcript(filename, content_newlines)
 
-    # return the content string, rather than make a file
     return content
 
-def get_summary(video_id: str):
-    download_video(video_id)
 
-    script = ""
+def upload_to_bucket(blob_name):
+    storage_client = storage.Client.from_service_account_json(
+        'config.json')
+
+    bucket = storage_client.get_bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    blob.upload_from_filename(blob_name)
+
+    return blob.public_url
+
+
+def get_summary(video_id: str):
     summary = ""
-    title = YouTube(video_id).title
-    # # retrieve the available transcripts
-    # transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-    #
-    # transcript = transcript_list.find_transcript(['en'])
-    #
-    # phrases = transcript.fetch()
-    # for phrase in phrases:
-    #     script = script + phrase['text'] + " "
-    bucket_name = os.getenv("BUCKET_NAME")
-    gs_uri_prefix = f"gs://{bucket_name}"
-    script = transcribe_file("gcs", "{0}.wav".format(video_id), gs_uri_prefix, True)
+    title = ""
+    load_dotenv()
+    ydl_opts = {
+        'format':
+            'bestaudio/best',
+        'outtmpl': "{0}.flac".format(video_id),
+        'postprocessors': [{
+            'key': 'FFmpegExtractAudio',
+            'preferredcodec': 'flac',
+            'preferredquality': '192'
+        }],
+    }
+
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        video = 'http://www.youtube.com/watch?v={0}'.format(video_id)
+        ydl.download([video])
+        info_dict = ydl.extract_info(video, download=False)
+        title = info_dict.get('title', None)
+
+    bucket_audio = "{0}.flac".format(video_id)
+    upload_to_bucket(bucket_audio)
+    script = transcribe_file("en", "gcs", bucket_audio, gs_uri_prefix)
 
     parser = PlaintextParser.from_string(script, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
@@ -99,6 +128,6 @@ def get_summary(video_id: str):
 
 
 if __name__ == "__main__":
-    r = get_summary('2O18RbWmrYA')
+    r = get_summary('Zv5Qa2kGL04')
     print(r[0])
     print(r[1])
