@@ -32,12 +32,13 @@ export default function Read(props) {
   const classes = useStyles();
   const [title, setTitle] = useState("TITLE HERE");
   const [content, setContent] = useState("CONTENT HERE");
-  let paragraphs = 0;
-  let words = 0;
+  let [paragraphs, setParagraphs] = useState(1);
+  let [words, setWords] = useState(0);
   let pages = 0;
   let readingTime = 0;
 
   useEffect(() => {
+    console.log(id);
     // Make a GET request with a shorthand method
     const config = {
       method: "post",
@@ -52,10 +53,13 @@ export default function Read(props) {
           // get things from API
           setTitle(response.data.title);
           setContent(response.data.content);
+          setWords(response.data.content.split(' ').length)
+          setParagraphs(1)
         })
         .catch((error) => {
           console.log(error);
         });
+
   });
 
   return (

@@ -112,7 +112,7 @@ def get_summary(video_id: str):
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         summary = summary + str(sentence) + " "
 
-    return summary
+    return [filename, summary]
 
 
 if __name__ == "__main__":

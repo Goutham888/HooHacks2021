@@ -64,12 +64,12 @@ export default function TopBar() {
             </Typography>
           </Button>
           <Grid container justify="flex-end">
-            <Button color="inherit" component={Link} to={"/transcribe"}>
+            {/* <Button color="inherit" component={Link} to={"/transcribe"}>
               <Typography variant="h7"> Transcribe</Typography>
             </Button>
             <Button color="inherit" component={Link} to={"/read"}>
               <Typography variant="h7"> Read</Typography>
-            </Button>
+            </Button> */}
             <IconButton
               edge="end"
               aria-label="account of current user"

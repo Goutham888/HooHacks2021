@@ -27,4 +27,5 @@ async def root():
 
 @app.post("/summarize/{video_id}")
 def get_video_summary(video_id: str):
-    return summarize.get_summary(video_id)
+    a = summarize.get_summary(video_id)
+    return {"title": a[0], "content": a[1]}
