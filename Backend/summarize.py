@@ -21,7 +21,7 @@ print(gs_uri_prefix)
 
 def download_video(video_id):
     ydl_opts = {
-        'outtmpl': '%(title)s.%(resolution)s.%(id)s.%(ext)s',
+        'outtmpl': '%(title)s?.',
         'format':
             'bestaudio/best',
         'postprocessors': [{
@@ -35,8 +35,7 @@ def download_video(video_id):
         uri = 'http://www.youtube.com/watch?v={0}'.format(video_id)
         ydl.download([uri])
         meta = ydl.extract_info(uri, download=False)
-    return "{0}.{1}x{2}.{3}.{4}".format((meta['title']), (meta['id']),
-                                            (meta['ext']))
+    return meta['title']
 
 
 def transcribe_file(input_language, mode, path, bucket_name):
@@ -99,7 +98,7 @@ def get_summary(video_id: str):
     summary = ""
     load_dotenv()
     filename = download_video(video_id)
-    filename = filename[:-5]
+    filename = filename
     bucket_audio = "{0}.flac".format(filename)
     upload_to_bucket(bucket_audio)
     script = transcribe_file("en", "gcs", bucket_audio, gs_uri_prefix)
