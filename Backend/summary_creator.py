@@ -12,15 +12,16 @@ from sumy.utils import get_stop_words
 from youtube_transcript_api import YouTubeTranscriptApi
 from punctuator import Punctuator
 
-
 LANGUAGE = "english"
 SENTENCES_COUNT = 10
 
 
 def get_summary(video_id: str):
-    script=""
-    summary=""
-    p = Punctuator('Demo-Europarl-EN.pcl')
+    script = ""
+    summary = ""
+    p = Punctuator(
+        "/Users/robertbao/Documents/GitHub/HooHacks2021/Backend/Demo-Europarl-EN.pcl"
+    )
     # retrieve the available transcripts
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
 
@@ -28,15 +29,15 @@ def get_summary(video_id: str):
 
     phrases = transcript.fetch()
     for phrase in phrases:
-            script=script+phrase['text']+" "
+        script = script + phrase['text'] + " "
 
     words = script.split(' ')
-    script=""
+    script = ""
     for word in words:
-        script=script+word+" "
+        script = script + word + " "
 
     if "." not in script:
-        script=p.punctuate(script)
+        script = p.punctuate(script)
 
     parser = PlaintextParser.from_string(script, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
@@ -44,11 +45,11 @@ def get_summary(video_id: str):
     summarizer = Summarizer(stemmer)
     summarizer.stop_words = get_stop_words(LANGUAGE)
 
-    
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
-        summary=summary+str(sentence)+" "
+        summary = summary + str(sentence) + " "
 
     return summary
 
+
 if __name__ == "__main__":
-    print(get_summary('-krnpNGHzvA'))
+    print(get_summary('SBqnRja4CW4'))

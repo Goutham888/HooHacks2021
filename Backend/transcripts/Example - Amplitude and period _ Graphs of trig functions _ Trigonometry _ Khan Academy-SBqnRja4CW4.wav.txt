@@ -1,0 +1,110 @@
+We're asked to determine the amplitude and the. Of y equals negative
+1/2 cosine of 3x of the first thing we have to ask ourselves is what
+does amplitude even refer to will the amplitude of a periodic function
+is just half the difference between the minimum and maximum values.
+It takes on the fire to drop periodic function like this and if we
+just go back and forth between to order a little bit neater goes
+back and forth between two values like that. So between that value
+in that value, you take the difference between the two and half of
+that is the amplitude another way of thinking about the amplitude
+is how much does its way? How much does its way from its middle position?
+Right over here. We have y equals -1/2 cosine of 3x. So what is
+going to be the amplitude of this?
+ Well the easy way to think about it is just what is the code what
+is multiplying the cosine function? And you could do the same thing.
+This is if it was a sine function, we have negative one-half multiplying
+it so the amplitude the amplitude the amplitude in this situation
+is going to be the absolute value the absolute value of -1/2 which
+is equal to one eye and you might say well, why do I not care about
+the sign? Why do I take the absolute value of it? The negative display
+lips the function around it's not going to change how much it's weighs
+between its minimum and maximum position. The other thing is well,
+how is it just simply the absolute value of this thing and realized
+why you just have to remember that a cosine function or sine function
+varies between positive 1 and -1 if it's just a simple function.
+So this is just multiplying that positive one or negative one. And
+so if normally the amplitude
+ If you didn't have any cool fishing here, if the coefficient was
+positive or negative one, the amplitude would just be one now you're
+changing it or you're multiplying it by this amount. So the amplitude
+is 1/2. Now. Let's think about the. Let's think about the. So the
+first thing I want to ask you is what does the. Of a of a cyclical
+function even or periodic function? I should say. What does the.
+Of a periodic function even refer to?
+ Well, let me draw. Let me draw some axes on this function right
+over here. Let's say that this right over here is the y axis.
+ That's the y-axis and let's just say for the sake of argument.
+This is the x-axis right over here. So the. Of a periodic function
+is the length of the smallest interval that contains exactly one
+copy of the repeating pattern of that periodic of that periodic function.
+So what do they mean you're well, it's repeating so we go down and
+then up just like that. Then we go down and then we go up. So in
+this case the length of the smallest interval that contains exactly
+one copy of the repeating pattern. This could be this could be one
+of the smallest repeating patterns. And so this length so this like
+between here and here would be one. Then we could go between here
+and here is another. And there's multiple this isn't the only pattern
+that you could pick you could say. Well, I'm going to find my pattern
+starting here going up and then going down.
+ Like that so you could say that's my smells like and then you would
+see that. Okay. Well, if you go in the negative Direction the next
+repeating version of that pattern is right over there. But either
+way you're going to get the same length the same length that it takes
+to repeat to a repeat that pattern. So the given that what is the.
+Of this function right over here?
+ Well to figure out the. We just take to Pi to Pi and / the absolute
+value of the coefficient right over here. So we / the absolute value
+of 3, which is just three so we get to Pi to pi over 3. Now. We need
+to think about the why does this work? Well, if you think about just
+a traditional cosine function between a traditional cosine function
+or traditional sine function. It has a. Of 2pi if you think about
+the unit circle if you think about the unit circle
+ 2 pi if you started 0 2pi radians later, you're back to where you
+started to Pi radians another to buy your back to where you started
+to go in the negative 2. If you go in the negative Direction you
+go negative to buy your back to where you started for any angle here.
+If you go to buy your back to where you are before you go negative
+to buy your back to where you were before. So the periods for these
+the periods for these are all to Pi.
+ And the reason why this makes sense is that this coefficient makes
+you get to 2pi or negative in this case two pies going to make you
+get to 2pi all that much faster. And so it gets your. Is going to
+be a lower number takes less like they're going to get to 2pi three
+times as fast. Now you might hear all of this was a negative number
+it would get you to -2 Pi all that much faster. But either way you're
+going to be completing one cycle visualize these two things. We draw
+let's actually draw negative one-half -1/2 cosine of 3x. So, let
+me draw my access year.
+ My best attempt to this is my y-axis. This is my x-axis and then
+we draw some so this is 0 right of your ex's equal to zero and let
+me drive X is equal to positive 1/2. I'm driving right over here.
+So X is equal to positive 1/2 and we haven't shifted this function
+up or down any then we if you wanted to we could add him a constant
+out here outside of the cosine function, but this is positive 1/2
+positive 1/2, or we could just right at that as 1/2 and then down
+here. Let's say that this is -1/2 negative 1/2 in to let me draw
+that bound. I'm just driving to started line so they come easy for
+me to draw and what happens when what happens when this is zero when
+cosine cosine of 0 is 1 * -1/2
+ Husband to be negative 1/2 and it be negative 1/2 right over here
+and it's going to start going up. It's going to start going up.
+ Then I can only go in that direction to bounded. It's going to
+start going up then we'll come back down.
+ And then it will get back to its original to that original point
+right over here. And the question is what is this distance? What
+is this length? What is this length going to be? Well, we know what
+it's. Is is 2 pi over 3. It's going to get to this point three times
+as fast as a traditional cosine function. So this is going to be
+to pi over 3, and then if you give it another two pi over 3, if you
+gave it another 2 pi over 3 is going to get back to that same Point
+again. So if you go another two Pi / 3.
+ So in this case you've now gone for pi over 3 for pi over 3, you
+completed another cycle. So that length right over. There's a. And
+you can also do the same thing. You could also do the same thing
+in the negative Direction. So this right over here this right over
+here be negative -2 pi over 3 and to visualize the amplitude. You
+see that it can go 1/2, you will destroy you think about it the the
+difference between the maximum and the minimum point is one half
+of that is 1/2 or you could say that it's it's going 1/2 in magnitude
+for or it's it's swaying 1/2 away from its middle position in the
+positive or or the negative Direction.
