@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
-from . import summarize
+from . import summary_creator
 
 app = FastAPI()
 
@@ -20,15 +19,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
-
-# After user inputs the link in the Home/Transcribe page
-# They will be redirected to the READ page
-# Where they will wait for the results to come out
 @app.post("/summarize/{video_id}")
 def get_video_summary(video_id: str):
-    return summarize.get_summary(video_id)
+    return {"title": "This is a Title", "content": "this is a summary"}
