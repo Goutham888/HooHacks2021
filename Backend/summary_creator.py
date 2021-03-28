@@ -31,14 +31,11 @@ def get_summary(video_id: str):
     for phrase in phrases:
         script = script + phrase['text'] + " "
 
-    words = script.split(' ')
-    script = ""
-    for word in words:
-        script = script + word + " "
-
     if "." not in script:
-        script = p.punctuate(script)
+        print("getting punctuated")
+        script=p.punctuate(script)
 
+    
     parser = PlaintextParser.from_string(script, Tokenizer(LANGUAGE))
     stemmer = Stemmer(LANGUAGE)
 
@@ -52,4 +49,4 @@ def get_summary(video_id: str):
 
 
 if __name__ == "__main__":
-    print(get_summary('SBqnRja4CW4'))
+    print(get_summary('jm9YKT0dItk'))

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react';
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +10,7 @@ import InputBase from "@material-ui/core/InputBase";
 import IconButton from "@material-ui/core/IconButton";
 import SearchIcon from "@material-ui/icons/Search";
 import Button from "@material-ui/core/Button";
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -36,6 +37,48 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Transcribe() {
   const classes = useStyles();
+  const [url, setURL] = useState('');
+  const [vidId, setVidId]=useState('');
+
+
+  const handleURLChange = event => {
+		setURL(event.target.value);
+    if(event.target.value.includes('youtu.be')){
+      setVidId(event.target.value.split('.be/')[1])
+      console.log(event.target.value.split('.be/')[1])
+    }
+    else if(event.target.value.includes('v=') && event.target.value.includes("&ab_channel")){
+      setVidId(event.target.value.split('v=')[1].substring(0,event.target.value.split('v=')[1].indexOf('&')));
+      console.log(event.target.value.split('v=')[1].substring(0,event.target.value.split('v=')[1].indexOf('&')))
+    }
+    else if(event.target.value.includes("v=")){
+      setVidId(event.target.value.split("v=")[1])
+      console.log(event.target.value.split("v=")[1])
+    }
+    
+	};
+
+  function handleSubmit(){
+    // Make a GET request with a shorthand method
+    
+    const config = {
+      method: "post",
+      // put the backend endpoint here
+      url: `http://127.0.0.1:8000/summarize/${vidId}`,
+      headers: {},
+    };
+
+    axios(config)
+      .then((response) => {
+        // get things from API
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    
+  }
+  
   return (
     <Box bgcolor="primary.main" className="classes.content">
       <Box my={14} mx={2}>
@@ -72,11 +115,13 @@ export default function Transcribe() {
               className={classes.input}
               placeholder="Enter YouTube link here"
               inputProps={{ "aria-label": "transcribe" }}
+              value={url}
+              onChange={handleURLChange}
             />
             <IconButton
-              type="submit"
               className={classes.iconButton}
               aria-label="search"
+              onClick={() => handleSubmit()}
             >
               <SearchIcon />
             </IconButton>
