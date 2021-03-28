@@ -1,5 +1,3 @@
-import os
-
 import youtube_dl
 from dotenv import load_dotenv
 from google.cloud import speech
@@ -9,7 +7,7 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.summarizers.lsa import LsaSummarizer as Summarizer
 from sumy.utils import get_stop_words
-import time
+import os
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 10
@@ -17,6 +15,9 @@ bucket_name = 'hoohacks2021'
 print(bucket_name)
 gs_uri_prefix = f"gs://{bucket_name}"
 print(gs_uri_prefix)
+
+config = "/Users/robertbao/Documents/GitHub/HooHacks2021/Backend/config.json"
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = config
 
 
 def download_video(video_id):
@@ -84,8 +85,7 @@ def transcribe_file(input_language, mode, path, bucket_name):
 
 
 def upload_to_bucket(blob_name):
-    storage_client = storage.Client.from_service_account_json(
-        'config.json')
+    storage_client = storage.Client.from_service_account_json(config)
 
     bucket = storage_client.get_bucket(bucket_name)
     blob = bucket.blob(blob_name)
@@ -112,7 +112,7 @@ def get_summary(video_id: str):
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         summary = summary + str(sentence) + " "
 
-    return [filename, summary]
+    return summary
 
 
 if __name__ == "__main__":

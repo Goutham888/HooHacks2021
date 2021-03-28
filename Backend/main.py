@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from . import summary_creator
+from . import summarize
 
 app = FastAPI()
 
@@ -19,10 +19,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
 
+
 @app.post("/summarize/{video_id}")
 def get_video_summary(video_id: str):
-    return {"title": "This is a Title", "content": "this is a summary"}
+    return summarize.get_summary(video_id)
