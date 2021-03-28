@@ -7,8 +7,6 @@ ydl_opts = {
         'key': 'FFmpegExtractAudio',
         'preferredcodec': 'wav',
         'preferredquality': '192'
-        # 'preferredcodec': 'mp3',
-        # 'preferredquality': '192',
     }],
 }
 with youtube_dl.YoutubeDL(ydl_opts) as ydl:

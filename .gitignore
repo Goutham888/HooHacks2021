@@ -6,3 +6,4 @@ Backend/config.json
 *.mp3
 *.wav
 *.pyc
+.idea

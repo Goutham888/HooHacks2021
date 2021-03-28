@@ -38,7 +38,7 @@ def split_newlines(content, n=64):
     return content_newlines
 
 
-def transcribe_file(input_language, mode, path, bucket_name, punctuation):
+def transcribe_file(mode, path, bucket_name, punctuation):
     """Asynchronously transcribes the audio file specified."""
 
     client = speech.SpeechClient()
@@ -70,10 +70,12 @@ def transcribe_file(input_language, mode, path, bucket_name, punctuation):
         print("Confidence: {}".format(result.alternatives[0].confidence))
         content += result.alternatives[0].transcript
         content += "\n"
+    # content_newlines = split_newlines(content)
+    # filename = path.split('/')[-1]
+    # save_transcript(filename, content_newlines)
 
-    content_newlines = split_newlines(content)
-    filename = path.split('/')[-1]
-    save_transcript(filename, content_newlines)
+    # return the content string, rather than make a file
+    return content
 
 
 if __name__ == "__main__":
@@ -85,4 +87,4 @@ if __name__ == "__main__":
     bucket_name = os.getenv("BUCKET_NAME")
     gs_uri_prefix = f"gs://{bucket_name}"
 
-    transcribe_file(input_language, mode, audio_file_path, gs_uri_prefix, True)
+    transcribe_file(mode, audio_file_path, gs_uri_prefix, True)
