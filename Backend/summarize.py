@@ -9,6 +9,7 @@ from sumy.nlp.tokenizers import Tokenizer
 from sumy.parsers.plaintext import PlaintextParser
 from sumy.summarizers.lsa import LsaSummarizer as Summarizer
 from sumy.utils import get_stop_words
+import time
 
 LANGUAGE = "english"
 SENTENCES_COUNT = 10
@@ -20,9 +21,9 @@ print(gs_uri_prefix)
 
 def download_video(video_id):
     ydl_opts = {
+        'outtmpl': '%(title)s.%(resolution)s.%(id)s.%(ext)s',
         'format':
             'bestaudio/best',
-        'outtmpl': "{0}.flac".format(video_id),
         'postprocessors': [{
             'key': 'FFmpegExtractAudio',
             'preferredcodec': 'flac',
@@ -31,7 +32,11 @@ def download_video(video_id):
     }
 
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download(['http://www.youtube.com/watch?v={0}'.format(video_id)])
+        uri = 'http://www.youtube.com/watch?v={0}'.format(video_id)
+        ydl.download([uri])
+        meta = ydl.extract_info(uri, download=False)
+    return "{0}.{1}x{2}.{3}.{4}".format((meta['title']), (meta['id']),
+                                            (meta['ext']))
 
 
 def transcribe_file(input_language, mode, path, bucket_name):
@@ -92,26 +97,10 @@ def upload_to_bucket(blob_name):
 
 def get_summary(video_id: str):
     summary = ""
-    title = ""
     load_dotenv()
-    ydl_opts = {
-        'format':
-            'bestaudio/best',
-        'outtmpl': "{0}.flac".format(video_id),
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'flac',
-            'preferredquality': '192'
-        }],
-    }
-
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        video = 'http://www.youtube.com/watch?v={0}'.format(video_id)
-        ydl.download([video])
-        info_dict = ydl.extract_info(video, download=False)
-        title = info_dict.get('title', None)
-
-    bucket_audio = "{0}.flac".format(video_id)
+    filename = download_video(video_id)
+    filename = filename[:-5]
+    bucket_audio = "{0}.flac".format(filename)
     upload_to_bucket(bucket_audio)
     script = transcribe_file("en", "gcs", bucket_audio, gs_uri_prefix)
 
@@ -124,7 +113,7 @@ def get_summary(video_id: str):
     for sentence in summarizer(parser.document, SENTENCES_COUNT):
         summary = summary + str(sentence) + " "
 
-    return [title, summary]
+    return [filename, summary]
 
 
 if __name__ == "__main__":
