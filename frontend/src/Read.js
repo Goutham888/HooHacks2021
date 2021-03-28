@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Read(props) {
-  const {id} = this.props.location;
+  const id = props.location.state.id;
   const classes = useStyles();
   const [title, setTitle] = useState("TITLE HERE");
   const [content, setContent] = useState("CONTENT HERE");
@@ -45,7 +45,6 @@ export default function Read(props) {
       url: `http://127.0.0.1:8000/summarize/${id}`,
       headers: {},
     };
-
 
     axios(config)
         .then((response) => {
